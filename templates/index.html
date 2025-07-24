@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ukiyo QR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts for modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <script>
+    // Optional: Dark mode toggle
+    function toggleDark() {
+      document.body.classList.toggle('light');
+    }
+    // Optional: Show spinner on form submit
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      const spinner = document.getElementById('spinner');
+      if (form && spinner) {
+        form.addEventListener('submit', function() {
+          spinner.style.display = 'block';
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">🌓</button>
+      <div class="logo">Ukiyo QR</div>
+      <div class="subtitle">Generate beautiful QR codes instantly</div>
+    </header>
+    <form method="POST" autocomplete="off">
+      <input type="text" name="data" placeholder="Enter text or URL..." required>
+      <button type="submit">Generate</button>
+    </form>
+    <div class="qr-area">
+      <div id="spinner" class="spinner"></div>
+      {% if qr_path %}
+        <img src="{{ qr_path }}" alt="QR Code">
+        <a href="{{ qr_path }}" download class="download-btn">Download PNG</a>
+      {% endif %}
+    </div>
+  </div>
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        © 2025 <strong>Ukiyo QR</strong>
+        <span class="footer-version">v1.0.1</span>
+        • Handcrafted by <strong><em>YabuTech</em></strong>
+      </div>
+      <nav class="footer-links">
+        <a href="#" id="about-link-footer">About</a>
+        <span class="footer-divider">•</span>
+        <a href="mailto:yabutech@gmail.com">Contact</a>
+        <span class="footer-divider">•</span>
+        <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">Try Customodoro</a>
+        <span class="footer-divider">•</span>
+        <a href="https://www.linkedin.com/in/brian-yabut/" target="_blank" rel="noopener">Connect</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
