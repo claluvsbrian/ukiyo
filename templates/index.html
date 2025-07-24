@@ -9,10 +9,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   <script>
-    // Optional: Dark mode toggle
-    function toggleDark() {
-      document.body.classList.toggle('light');
-    }
     // Optional: Show spinner on form submit
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.querySelector('form');
@@ -24,11 +20,40 @@
       }
     });
   </script>
+  <script>
+    // About modal handling
+    document.addEventListener('DOMContentLoaded', function () {
+        const modalOverlay = document.getElementById('about-modal-overlay');
+        const closeBtn = document.getElementById('about-modal-close');
+        const confirmBtn = document.getElementById('about-close-btn');
+        const aboutTriggers = document.querySelectorAll('#about-icon, #about-link-footer');
+        function openModal() {
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        aboutTriggers.forEach(el => {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                openModal();
+            });
+        });
+        closeBtn.addEventListener('click', closeModal);
+        confirmBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', function (event) {
+            if (event.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    });
+  </script>
 </head>
 <body>
   <div class="container">
     <header>
-      <button class="dark-toggle" onclick="toggleDark()" title="Toggle dark mode">🌓</button>
       <div class="logo">Ukiyo QR</div>
       <div class="subtitle">Generate beautiful QR codes instantly</div>
     </header>
@@ -44,6 +69,7 @@
       {% endif %}
     </div>
   </div>
+
   <!-- Footer Section -->
   <footer class="footer">
     <div class="footer-content">
@@ -63,5 +89,47 @@
       </nav>
     </div>
   </footer>
+  <!-- About Modal -->
+  <div class="modal-overlay" id="about-modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
+      <div class="modal-header">
+        <span class="modal-title" id="about-modal-title">About Ukiyo QR</span>
+        <button class="modal-close" id="about-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-content">
+        <p><strong>Ukiyo QR</strong> is a minimalist, modern QR code generator web app built with Flask and Python. Easily create and download QR codes for links, text, and more.</p>
+        <p>Designed and handcrafted by <a href="https://www.linkedin.com/in/brian-yabut/" target="_blank" rel="noopener" style="color:#ffd93d;">YabuTech</a>.</p>
+        <div class="plug-title" style="margin-top:1.2rem;">Check our other apps!</div>
+        <ul class="plug-list" style="margin-bottom:1.2rem;">
+          <li>
+            <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener">
+              Customodoro Timer
+            </a>
+          </li>
+          <li>
+            <a href="https://wakey2x.vercel.app/" target="_blank" rel="noopener">
+              Wakey Wakey (Keep your computer awake)
+            </a>
+          </li>
+          <li>
+            <a href="https://yabutech.vercel.app/" target="_blank" rel="noopener">
+              Website Portfolio (built with React.js)
+            </a>
+          </li>
+        </ul>
+        <div class="modal-note">
+          <strong>Note:</strong> Your QR codes are generated locally and never stored.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn" id="about-close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
