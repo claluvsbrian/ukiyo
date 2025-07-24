@@ -8,6 +8,50 @@
   <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      /* Responsive background image with stronger overlay */
+      background: 
+        linear-gradient(rgba(30, 34, 44, 0.65), rgba(30, 34, 44, 0.65)),
+        url("{{ url_for('static', filename='img/thegreatwave.jpg') }}") no-repeat center center fixed;
+      background-size: cover;
+      background-attachment: fixed;
+      /* background-blend-mode: darken; -- removed */
+      background-color: #1e222c;
+      transition: background 0.3s;
+    }
+    @media (max-width: 700px) {
+      body {
+        background-position: center top;
+        background-size: cover;
+      }
+      .container {
+        background: rgba(30,34,44,0.92);
+        border-radius: 1.2rem;
+        margin: 1.2rem;
+        padding: 1.2rem;
+      }
+    }
+    .container {
+      background: rgba(255,255,255,0.10);
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      margin: 2.5rem auto;
+      padding: 2.5rem 2rem 1.5rem 2rem;
+      max-width: 420px;
+    }
+    /* Optional: Make modal pop above background */
+    .modal-overlay {
+      background: rgba(30,34,44,0.92);
+      /* ...existing modal styles... */
+    }
+  </style>
   <script>
     // Optional: Show spinner on form submit
     document.addEventListener('DOMContentLoaded', function() {
@@ -55,7 +99,7 @@
   <div class="container">
     <header>
       <div class="logo">Ukiyo QR</div>
-      <div class="subtitle">Generate beautiful QR codes instantly</div>
+      <div class="subtitle">Lightweight QR generator for everyone</div>
     </header>
     <form method="POST" autocomplete="off">
       <input type="text" name="data" placeholder="Enter text or URL..." required>
@@ -128,8 +172,4 @@
   </div>
 </body>
 </html>
-      </div>
-    </div>
-  </div>
-</body>
 </html>
