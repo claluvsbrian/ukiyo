@@ -1,6 +1,13 @@
 html, body {
     overflow-x: hidden;
-    width: 100vw;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+* {
     box-sizing: border-box;
 }
 
@@ -147,6 +154,38 @@ body {
 header {
   text-align: center;
   margin-bottom: 2rem;
+}
+
+/* Navigation Styles */
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.nav-link.active {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 .logo {
   font-size: 2.2rem;
@@ -527,4 +566,51 @@ footer {
     .modal-title {
         font-size: 1.1rem;
     }
+}
+
+/* SEO Content Section */
+.seo-intro {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.seo-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.seo-intro h3 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.75rem 0;
+  color: #4fd1c5;
+  font-weight: 600;
+}
+
+.seo-intro p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 768px) {
+  .seo-intro {
+    padding: 1.5rem 1rem;
+    text-align: left;
+  }
+  
+  .seo-intro h2 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  
+  .seo-intro h3 {
+    font-size: 1.2rem;
+  }
 }

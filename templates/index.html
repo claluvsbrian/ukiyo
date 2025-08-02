@@ -2,8 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ukiyo QR</title>
+  <title>Ukiyo QR - Free QR Code Generator | Create QR Codes Instantly</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generate QR codes instantly with Ukiyo QR - a free, privacy-focused QR code generator. Create QR codes for URLs, text, contact info, WiFi passwords, and more. No registration required.">
+  <meta name="keywords" content="QR code generator, free QR codes, create QR code, QR code maker, instant QR generator, privacy QR tool, ukiyo, Japanese art">
+  <meta name="author" content="YabuTech">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Ukiyo QR - Free QR Code Generator">
+  <meta property="og:description" content="Create high-quality QR codes instantly with our privacy-focused generator. Free, fast, and secure.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ukiyo.onrender.com">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ukiyo QR - Free QR Code Generator">
+  <meta name="twitter:description" content="Generate QR codes instantly with our free, privacy-focused tool.">
   <!-- Google Fonts for modern look -->
   <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -11,6 +22,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4958673233812388" crossorigin="anonymous"></script>
   <style>
     body {
       min-height: 100vh;
@@ -103,12 +116,18 @@ crossorigin="anonymous"></script>
 
 </head>
 <body>
-  <div class="container">
+  <div class="container" data-ad-ignore="true">
     <header>
       <div class="logo">Ukiyo QR</div>
       <div class="subtitle">Lightweight QR generator for everyone</div>
+      <nav class="main-nav">
+        <a href="#generator" class="nav-link active">Generator</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#guide" class="nav-link">How to Use</a>
+        <a href="#privacy" class="nav-link">Privacy</a>
+      </nav>
     </header>
-    <form method="POST" autocomplete="off">
+    <form method="POST" autocomplete="off" id="generator">
       <input type="text" name="data" placeholder="Enter text or URL..." required>
       <button type="submit">Generate</button>
     </form>
@@ -120,6 +139,43 @@ crossorigin="anonymous"></script>
       {% endif %}
     </div>
   </div>
+
+  <!-- SEO Content Section -->
+  <section class="seo-intro" id="about">
+    <h2>🌊 What is Ukiyo QR?</h2>
+    <p>
+      Ukiyo QR is a simple, fast, and modern QR Code generator built with privacy in mind. Create high-quality QR codes instantly for sharing links, contact information, WiFi credentials, and more. Our tool is designed for students, creators, small business owners, and anyone who needs quick QR code generation.
+    </p>
+    
+    <h3>🎌 The Meaning Behind "Ukiyo"</h3>
+    <p>
+      "Ukiyo" (浮世) is a beautiful Japanese word meaning "floating world" or "living in the moment." It represents the philosophy of finding beauty in the fleeting nature of life. This concept inspired the famous ukiyo-e art movement, which gave us masterpieces like Hokusai's "The Great Wave off Kanagawa" — the very artwork that serves as our app's background and favicon.
+    </p>
+    
+    <h3>⚡ Why Choose Ukiyo QR?</h3>
+    <p>
+      Our QR code generator prioritizes your privacy and simplicity. Unlike other tools, we don't store your data or track your usage. Generate QR codes for websites, text messages, email addresses, phone numbers, and more. The tool works entirely in your browser, ensuring your information stays private and secure.
+    </p>
+    
+    <p>
+      Whether you're a teacher sharing classroom resources, a business owner creating contactless menus, or a creative professional sharing portfolio links, Ukiyo QR provides a clean, efficient solution for all your QR code needs.
+    </p>
+    
+    <h3 id="guide">🔧 How to Use Ukiyo QR Generator</h3>
+    <p>
+      Using our QR code generator is simple and straightforward. Enter any text, URL, email address, or phone number in the input field above and click "Generate". Your QR code will be created instantly and can be downloaded as a high-quality PNG image. The process is completely free and requires no registration or personal information.
+    </p>
+    
+    <h3>📱 QR Code Use Cases</h3>
+    <p>
+      QR codes have become essential tools in our digital world. Create QR codes for restaurant menus, business cards, WiFi passwords, social media profiles, event invitations, product information, contact details, website URLs, and much more. Our generator supports all standard QR code formats and ensures maximum compatibility across all devices and QR code readers.
+    </p>
+    
+    <h3 id="privacy">🛡️ Privacy and Security</h3>
+    <p>
+      Your privacy is our priority. Unlike many online QR generators, Ukiyo QR processes everything locally in your browser. We don't store your data, track your usage, or require account creation. Your information remains completely private and secure throughout the entire QR code generation process.
+    </p>
+  </section>
 
   <!-- Footer Section -->
   <footer class="footer">
@@ -179,4 +235,3 @@ crossorigin="anonymous"></script>
   </div>
 </body>
 </html>
-
