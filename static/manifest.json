@@ -1,0 +1,22 @@
+{
+  "name": "Ukiyo QR - Free QR Code Generator",
+  "short_name": "Ukiyo QR",
+  "description": "Generate QR codes instantly with our privacy-focused generator. Free, fast, and secure.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e222c",
+  "theme_color": "#38bdf8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/img/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false
+}

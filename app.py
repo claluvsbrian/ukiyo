@@ -1,9 +1,76 @@
-from flask import Flask, render_template, request, send_file, send_from_directory
+from flask import Flask, render_template, request, send_file, send_from_directory, make_response
+from flask.helpers import get_root_path
 import qrcode
 import os
+import gzip
+import io
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
+
+# Enable compression for better performance
+@app.after_request
+def compress_response(response):
+    accept_encoding = request.headers.get('Accept-Encoding', '')
+    
+    if ('gzip' in accept_encoding.lower() and 
+        response.status_code < 300 and 
+        response.content_length is None and
+        'Content-Encoding' not in response.headers):
+        
+        # Only compress text-based content
+        if (response.content_type.startswith('text/') or 
+            response.content_type.startswith('application/json') or
+            response.content_type.startswith('application/javascript')):
+            
+            gzip_buffer = io.BytesIO()
+            with gzip.GzipFile(fileobj=gzip_buffer, mode='wb') as gzip_file:
+                gzip_file.write(response.get_data())
+            
+            response.set_data(gzip_buffer.getvalue())
+            response.headers['Content-Encoding'] = 'gzip'
+            response.headers['Content-Length'] = len(response.get_data())
+    
+    return response
+
+# Security headers middleware
+@app.after_request
+def add_security_headers(response):
+    # Content Security Policy
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.google.com https://www.gstatic.com; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com; "
+        "img-src 'self' data: https://pagead2.googlesyndication.com https://www.google.com https://googleads.g.doubleclick.net; "
+        "connect-src 'self' https://pagead2.googlesyndication.com; "
+        "frame-src https://googleads.g.doubleclick.net; "
+        "object-src 'none'; "
+        "base-uri 'self';"
+    )
+    
+    # HSTS (HTTP Strict Transport Security)
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    
+    # X-Frame-Options (Clickjacking protection)
+    response.headers['X-Frame-Options'] = 'DENY'
+    
+    # X-Content-Type-Options
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    
+    # X-XSS-Protection
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    
+    # Referrer Policy
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    
+    # Cross-Origin Embedder Policy
+    response.headers['Cross-Origin-Embedder-Policy'] = 'require-corp'
+    
+    # Cross-Origin Opener Policy
+    response.headers['Cross-Origin-Opener-Policy'] = 'same-origin'
+    
+    return response
 
 # Ensure QR directory exists
 QR_FOLDER = 'static/qr'
@@ -44,13 +111,41 @@ def index():
 
 @app.route('/ads.txt')
 def ads():
-    return send_from_directory('.', 'ads.txt')
+    response = make_response(send_from_directory('.', 'ads.txt'))
+    response.headers['Cache-Control'] = 'public, max-age=86400'  # 1 day
+    return response
+
+# Optimized static file caching route
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    response = make_response(send_from_directory('static', filename))
+    
+    # Set appropriate cache headers based on file type
+    if filename.endswith(('.css', '.js')):
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+        response.headers['Vary'] = 'Accept-Encoding'
+    elif filename.endswith(('.png', '.jpg', '.jpeg', '.gif', '.ico', '.svg', '.webp')):
+        response.headers['Cache-Control'] = 'public, max-age=31536000, immutable'
+    elif filename.endswith('.json'):
+        response.headers['Cache-Control'] = 'public, max-age=86400'
+        response.headers['Content-Type'] = 'application/json'
+    
+    # Add ETag for better caching
+    response.add_etag()
+    return response.make_conditional(request)
 
 @app.route('/robots.txt')
 def robots():
     return '''User-agent: *
 Allow: /
 Sitemap: https://ukiyo.onrender.com/sitemap.xml''', 200, {'Content-Type': 'text/plain'}
+
+@app.route('/manifest.json')
+def manifest():
+    response = make_response(send_from_directory('static', 'manifest.json'))
+    response.headers['Content-Type'] = 'application/json'
+    response.headers['Cache-Control'] = 'public, max-age=86400'  # 1 day
+    return response
 
 @app.route('/sitemap.xml')
 def sitemap():
