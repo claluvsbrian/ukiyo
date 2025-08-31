@@ -1,4 +1,5 @@
 {
+  "_comment": "Railway configuration for ukiyo QR generator",
   "build": {
     "builder": "nixpacks"
   },
