@@ -287,6 +287,104 @@
       transform: translateY(-1px);
     }
     
+    /* Our Apps Section */
+    .our-apps {
+      margin: 4rem 0 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .app-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .app-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.2rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .app-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .app-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .app-icon-img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+    
+    .app-details {
+      flex: 1;
+    }
+    
+    .app-details h3 {
+      margin: 0 0 0.5rem;
+      color: #38bdf8;
+      font-size: 1.2rem;
+    }
+    
+    .app-details p {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+    }
+    
+    .app-button {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    
+    .app-button:hover {
+      background: rgba(56, 189, 248, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    @media (max-width: 640px) {
+      .app-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .app-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      
+      .app-icon {
+        margin-bottom: 1rem;
+      }
+    }
+    
     .technology-stack {
       background: rgba(139, 92, 246, 0.1);
       border: 1px solid rgba(139, 92, 246, 0.3);
@@ -420,7 +518,7 @@
     <header class="about-header">
       <h1 class="about-title">About Ukiyo QR</h1>
       <p class="about-subtitle">A free, privacy-focused QR code generator inspired by Japanese art and philosophy</p>
-      <p class="version-info">Version 1.2.0 • Built with ❤️ by YabuTech</p>
+      <p class="version-info">Version 1.3.0 • Built with ❤️ by YabuTech</p>
     </header>
     
     <main class="about-content">
@@ -604,6 +702,35 @@
       </ul>
       
       <p>Thank you for being part of the Ukiyo QR community. Together, we're creating a more beautiful, private, and accessible digital world.</p>
+      
+      <section class="our-apps">
+        <h2>✨ Our Apps</h2>
+        <p>Explore our collection of thoughtfully designed productivity tools:</p>
+        
+        <div class="app-cards">
+          <div class="app-card">
+            <div class="app-icon">
+              <img src="{{ url_for('static', filename='img/favicon.png') }}" alt="Ukiyo QR" class="app-icon-img">
+            </div>
+            <div class="app-details">
+              <h3>Ukiyo QR</h3>
+              <p>Free, privacy-focused QR code generator with a beautiful Japanese art theme.</p>
+              <a href="/" class="app-button">Use Ukiyo QR</a>
+            </div>
+          </div>
+          
+          <div class="app-card">
+            <div class="app-icon">
+              <img src="{{ url_for('static', filename='img/customodoro-icon.png') }}" alt="Customodoro Timer" class="app-icon-img">
+            </div>
+            <div class="app-details">
+              <h3>Customodoro Timer</h3>
+              <p>Customizable Pomodoro timer with task tracking and productivity analytics.</p>
+              <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener" class="app-button">Try Customodoro</a>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     
     <div class="back-to-home">
