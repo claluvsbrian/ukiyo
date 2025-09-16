@@ -45,6 +45,75 @@
   
   <!-- Critical CSS inlined for faster rendering -->
   <style>
+    /* Footer Brand and Promotion */
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    
+    .footer-copyright {
+      text-align: center;
+    }
+    
+    .footer-promo {
+      margin-top: 0.5rem;
+    }
+    
+    .customodoro-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+    
+    .customodoro-link:hover {
+      color: #38bdf8;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .customodoro-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+    
+    .arrow {
+      margin-left: 0.2rem;
+      transition: transform 0.2s ease;
+    }
+    
+    .customodoro-link:hover .arrow {
+      transform: translateX(2px);
+    }
+    
+    @media (max-width: 640px) {
+      .footer-brand {
+        gap: 0.75rem;
+      }
+      
+      .footer-copyright {
+        font-size: 0.9rem;
+      }
+      
+      .footer-promo {
+        margin-top: 0.25rem;
+      }
+      
+      .customodoro-link {
+        font-size: 0.85rem;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+    
     /* Immediate FOUC prevention */
     html {
       visibility: hidden;
@@ -427,9 +496,19 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
-        © 2025 <strong>Ukiyo QR</strong>
-        <span class="footer-version">v1.2.0</span>
-        • Handcrafted by <strong><em><a href="https://yabutech.vercel.app/" target="_blank" rel="noopener" style="color:#ffd93d;">YabuTech</a></em></strong>
+        <div class="footer-copyright">
+          © 2025 <strong>Ukiyo QR</strong>
+          <span class="footer-version">v1.3.0</span>
+          • Handcrafted by <strong><em><a href="https://yabutech.vercel.app/" target="_blank" rel="noopener" style="color:#ffd93d;">YabuTech</a></em></strong>
+        </div>
+        <div class="footer-promo">
+          <a href="https://customodoro.vercel.app/" target="_blank" rel="noopener" class="customodoro-link">
+            <span>Try our other app: </span>
+            <img src="{{ url_for('static', filename='img/customodoro-icon.png') }}" alt="Customodoro" class="customodoro-icon">
+            <span>Customodoro Timer</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
       </div>
       <nav class="footer-links">
         <a href="/blog">Blog</a>
